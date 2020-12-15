@@ -1,0 +1,9 @@
+{
+    "integrationFolder": "testing/tests",
+    "pluginsFile": false,
+    "fixturesFolder": false,
+    "baseUrl": "https://localhost/",
+    "viewportWidth": 1200,
+    "video": false,
+    "supportFile": "testing/support/index.js"
+}
