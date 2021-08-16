@@ -11,7 +11,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class AlertField extends Vue {
-  @Prop(String) type!: string
+  @Prop(Number) type!: number
   @Prop(String) value!: string
   @Prop(Number) interval!: number
   @Prop(Number) index!: number

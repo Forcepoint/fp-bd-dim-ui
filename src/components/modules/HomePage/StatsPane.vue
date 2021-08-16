@@ -13,24 +13,37 @@
 
     <!-- Panel Content -->
     <div class="panel-content">
-      <Stat
-        :name="'Blocked IP Addresses'"
-        :value="stats.num_blocked_ips"
-        :loading="loading"
-        class="left-pane"
-      />
-      <Stat
-        :name="'Blocked Domains'"
-        :value="stats.num_blocked_domains"
-        :loading="loading"
-        class="middle-pane"
-      />
-      <Stat
-        :name="'Blocked URLs'"
-        :value="stats.num_blocked_urls"
-        :loading="loading"
-        class="right-pane"
-      />
+      <div class="flex-column">
+        <div class="flex-row">
+          <Stat
+            :name="'Blocked IP Addresses'"
+            :value="stats.num_blocked_ips"
+            :loading="loading"
+          />
+          <Stat
+            :name="'Blocked Domains'"
+            :value="stats.num_blocked_domains"
+            :loading="loading"
+          />
+          <Stat
+            :name="'Blocked URLs'"
+            :value="stats.num_blocked_urls"
+            :loading="loading"
+          />
+        </div>
+        <div class="flex-row">
+          <Stat
+            :name="'Blocked Ranges'"
+            :value="stats.num_blocked_ranges"
+            :loading="loading"
+          />
+          <Stat
+            :name="'Blocked Snorts'"
+            :value="stats.num_blocked_snorts"
+            :loading="loading"
+          />
+        </div>
+      </div>
       <div class="clear"></div>
     </div>
 
@@ -72,13 +85,7 @@ export default class StatsPane extends Vue {
     // Retrieve statistics
     const url = '/api/stats'
     Vue.axios.get(url).then((response) => {
-      this.stats.set(
-        response.data.num_sources,
-        response.data.num_blocked_ips,
-        response.data.num_blocked_domains,
-        response.data.num_blocked_urls,
-        response.data.last_update
-      )
+      this.stats.set(response.data)
       this.loading = false
     }).catch((error) => {
       if (error.response.status === 401) {
@@ -102,3 +109,20 @@ export default class StatsPane extends Vue {
 
 }
 </script>
+
+<style lang="scss" scoped>
+
+  @import '@/scss/variables.scss';
+
+  .flex-row {
+    display: flex;
+    gap: 0.5em;
+  }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+  }
+
+</style>

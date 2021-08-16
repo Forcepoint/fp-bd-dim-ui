@@ -36,7 +36,8 @@ export default class Stat extends Vue {
 
   .statistic-pane {
     display: block;
-    width: calc(33.33% - 0.67em);
+    width: 100%;
+    flex: 1;
     float: left;
     box-sizing: border-box;
     padding: 1em 0;
@@ -55,14 +56,6 @@ export default class Stat extends Vue {
   .stat-title {
     color: $main;
     text-transform: uppercase;
-  }
-
-  .left-pane {
-    margin-right: 1em;
-  }
-
-  .right-pane {
-    margin-left: 1em;
   }
 
 </style>

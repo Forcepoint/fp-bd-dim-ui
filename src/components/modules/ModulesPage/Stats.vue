@@ -50,13 +50,7 @@ export default class Stats extends Vue {
 
     const url = `/api/stats?servicename=${this.module.module_service_name}`
     Vue.axios.get(url).then((response) => {
-      this.stats.set(
-        response.data.num_sources,
-        response.data.num_blocked_ips,
-        response.data.num_blocked_domains,
-        response.data.num_blocked_urls,
-        response.data.last_update
-      )
+      this.stats.set(response.data)
       this.loading = false
     }).catch((error) => {
       if (error.response.status === 401) {

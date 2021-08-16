@@ -127,7 +127,11 @@ export default class Config extends Vue {
     // Build config to be posted.
     const config = { values: {} }
     Object.keys(this.$refs).forEach(ref => {
-      const child = this.$refs[ref][0].$refs
+      const reference = this.$refs[ref]
+      if (reference === undefined) {
+        return
+      }
+      const child = reference[0].$refs
       Object.keys(child).forEach(child_ref => {
         if (child_ref !== 'filedata') {
           config.values[child_ref] = child[child_ref].value

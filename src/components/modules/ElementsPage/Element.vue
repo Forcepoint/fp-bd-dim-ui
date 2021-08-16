@@ -18,6 +18,9 @@
       <input type="text" placeholder="From" :class="{'odd-input': (index % 2 == 0), 'error': error}" class="from-to" v-model="from" />
       <input type="text" placeholder="To" :class="{'odd-input': (index % 2 == 0), 'error': error}" class="from-to" v-model="to" />
     </td>
+    <td class="element-value" v-if="element.type == 'SNORT'">
+      <textarea placeholder="Value" :class="{'error': error}" v-model="element.value" />
+    </td>
     <td class="element-value" v-else>
       <input type="text" placeholder="Value" :class="{'odd-input': (index % 2 == 0), 'error': error}" v-model="value" />
     </td>
@@ -344,7 +347,16 @@ input {
   max-width: 12em;
 }
 
-input:hover {
+textarea {
+  background-color: $secondary;
+  border: none;
+  padding: 1.5em 1.25em;
+  max-width: 17.5em;
+  min-width: 17.5em;
+  min-height: 10em;
+}
+
+input:hover, textarea:hover {
   background-color: $quatenary;
 }
 

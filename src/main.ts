@@ -67,7 +67,7 @@ const router = new VueRouter({
 // Set global base URL for requests
 if (process.env.NODE_ENV === 'development') {
   Vue.prototype.$RegistrationToken = ''
-  Vue.axios.defaults.baseURL = 'http://localhost:8080'
+  Vue.axios.defaults.baseURL = 'http://localhost'
 }
 
 // Handle Authentication check before each page.

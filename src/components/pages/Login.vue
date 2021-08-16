@@ -8,7 +8,7 @@
         <h2>Sign in</h2>
         <Alert :alert_title="'alert'" />
         <input type="text" placeholder="Email" :ref="'email'" id="email" />
-        <input type="password" placeholder="Password" :ref="'password'" id="password" />
+        <input type="password" placeholder="Password" :ref="'password'" @keyup.enter="login" id="password" />
         <button @click="login">Login</button>
         <div class="clear" />
       </div>

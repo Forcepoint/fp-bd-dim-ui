@@ -44,7 +44,8 @@ export default class CatalogModule extends Vue {
     IP: 'IP Addresses',
     RANGE: 'IP Ranges',
     URL: 'URLs',
-    DOMAIN: 'Domains'
+    DOMAIN: 'Domains',
+    SNORT: 'Snort Rules'
   }
 
   /**

@@ -10,7 +10,6 @@
         </div>
         <ul class="menu-links" :class="{'menu-open': open}">
           <router-link v-for="(route, index) in this.$router.options.routes.slice(0,6)" :to="route.path" :key="index" class="menu-item" @click.native="open = false">{{ route.name }}</router-link>
-          <a class="menu-item" @click="logout">Logout</a>
         </ul>
       </div>
       <div class="menu-right">
@@ -18,6 +17,7 @@
         <ul>
           <li><router-link :to="'/settings'"><font-awesome-icon icon="cog" class="help-icon"></font-awesome-icon></router-link></li>
           <li><a href="https://frcpnt.com/dim"><font-awesome-icon icon="question-circle" class="help-icon"></font-awesome-icon></a></li>
+          <li @click="logout"><font-awesome-icon icon="sign-out-alt" class="help-icon"></font-awesome-icon></li>
         </ul>
       </div>
     </div>
@@ -32,7 +32,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Alert from '@/components/modules/Global/Alert.vue'
-import jwt_decode from 'jwt-decode'
+import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 @Component({
   components: {
@@ -82,11 +82,12 @@ export default class App extends Vue {
 
     // Retrieve token and verify.
     const token = localStorage.getItem('token')
-    if (token === undefined || token === '') {
+    if (token === undefined || token === '' || token === null) {
       return
     }
-    const exp = jwt_decode(token).standard_claims.exp
-    if (Date.now() >= exp * 1000) {
+
+    const exp = jwt_decode<JwtPayload>(token).exp
+    if (exp === undefined || Date.now() >= exp * 1000) {
       return
     }
 
@@ -131,6 +132,7 @@ export default class App extends Vue {
   /**
    * Handle messages received on the Websocket.
    */
+  // eslint-disable-next-line
   handle_message(event: any) {
 
     // Parse event.

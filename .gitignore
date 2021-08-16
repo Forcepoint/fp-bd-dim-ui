@@ -128,3 +128,6 @@ npm-debug.log
 yarn-error.log
 
 # End of https://www.gitignore.io/vue,node,vuejs
+
+# custom
+.commands
